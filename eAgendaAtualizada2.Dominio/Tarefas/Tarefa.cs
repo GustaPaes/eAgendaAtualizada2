@@ -43,7 +43,9 @@ namespace eAgendaAtualizada2.Dominio
         public void AdicionarItem(ItemTarefa item)
         {
             if (Itens.Exists(x => x.Equals(item)) == false)
+            {
                 itens.Add(item);
+            }
         }
 
         public void ConcluirItem(ItemTarefa item)

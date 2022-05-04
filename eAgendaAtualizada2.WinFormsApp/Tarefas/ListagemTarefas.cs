@@ -49,8 +49,35 @@ namespace eAgendaAtualizada2.WinApp
 
             if (resultado == DialogResult.OK)
             {
-                repositorioTarefa.Inserir(tela.Tarefa);
-                CarregarTarefas();
+                if (tela.Tarefa.Titulo != "")
+                {
+                    List<Tarefa> tarefas = repositorioTarefa.SelecionarTodos();
+
+                    foreach (Tarefa t in tarefas)
+                    {
+                        if (t.Titulo == tela.Tarefa.Titulo)
+                        {
+                            MessageBox.Show("Ja possue uma Tarefa com o Mesmo Titulo!",
+                            "Inserir Tarefas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else
+                        {
+                            repositorioTarefa.Inserir(tela.Tarefa);
+                            CarregarTarefas();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Titulo é obrigatorio!",
+                    "Inserir Tarefas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+
+                Tarefa tarefaSelecionada = (Tarefa)listTarefasPendentes.SelectedItem;
+
+
             }
         }
 
